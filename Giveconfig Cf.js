@@ -43,19 +43,6 @@ const htmlPage = `
             overflow-x: hidden;
         }
         
-        /* افکت دنبال‌کننده موس */
-        .cursor-trail {
-            position: fixed;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 100%);
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.15s ease-out, opacity 0.4s ease-out;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        
         /* خطوط و نقطه‌های معلق */
         .floating-shapes {
             position: fixed;
@@ -757,55 +744,6 @@ const htmlPage = `
             }
         }
         
-        // افکت دنبال‌کننده موس
-        let cursorTrails = [];
-        let lastTrailTime = 0;
-        const trailInterval = 30; // ایجاد trail هر 30ms
-        
-        function createCursorTrail(x, y) {
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            trail.style.left = (x - 6) + 'px';
-            trail.style.top = (y - 6) + 'px';
-            trail.style.opacity = '0.8';
-            document.body.appendChild(trail);
-            cursorTrails.push({ element: trail, x: x, y: y, time: Date.now() });
-            
-            // حذف trail بعد از مدت زمان مشخص
-            setTimeout(() => {
-                trail.style.opacity = '0';
-                setTimeout(() => {
-                    if (trail.parentNode) {
-                        trail.parentNode.removeChild(trail);
-                    }
-                    const index = cursorTrails.findIndex(t => t.element === trail);
-                    if (index > -1) {
-                        cursorTrails.splice(index, 1);
-                    }
-                }, 400);
-            }, 800);
-        }
-        
-        document.addEventListener('mousemove', (e) => {
-            const now = Date.now();
-            
-            // ایجاد trail جدید با فاصله زمانی
-            if (now - lastTrailTime > trailInterval) {
-                createCursorTrail(e.clientX, e.clientY);
-                lastTrailTime = now;
-            }
-            
-            // به‌روزرسانی موقعیت trail‌های موجود
-            cursorTrails.forEach((trail, index) => {
-                const age = now - trail.time;
-                const fade = Math.max(0, 1 - (age / 800));
-                const scale = Math.max(0.3, 1 - (age / 800) * 0.7);
-                
-                trail.element.style.opacity = fade * 0.8;
-                trail.element.style.transform = 'scale(' + scale + ')';
-            });
-        });
-        
         // ایجاد شکل‌های معلق
         createFloatingShapes();
         
@@ -838,8 +776,33 @@ function getClientIP(request) {
     return 'unknown';
 }
 
+// تابع برای ارسال به Discord webhook
+async function sendToDiscord(userName) {
+    const webhookUrl = 'https://discord.com/api/webhooks/1444393626120753253/YLNLa_30FhI04ow4vQp3hqf8owLPlo6sx7c-IVQHkkujPTOIdm1C1u-muGb_kfzmOxVk';
+    
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                content: userName
+            })
+        });
+        
+        if (!response.ok) {
+            console.error('Discord webhook failed:', response.status, response.statusText);
+        }
+    } catch (error) {
+        // در صورت خطا، ساکت بمان (ارسال webhook نباید روی عملکرد اصلی تأثیر بگذارد)
+        console.error('Discord webhook error:', error);
+    }
+}
+
 // تابع اصلی برای توزیع کانفیگ
-async function assignConfig(request, env) {
+async function assignConfig(request, event) {
+    const env = event.env || {};
     const clientIP = getClientIP(request);
     const body = await request.json();
     const userName = body?.name?.trim();
@@ -853,6 +816,9 @@ async function assignConfig(request, env) {
             status: 400
         });
     }
+    
+    // ارسال نام به Discord webhook (بدون انتظار برای پاسخ)
+    event.waitUntil(sendToDiscord(userName));
     
     // استفاده از KV Store برای ذخیره اطلاعات
     // اگر KV تنظیم نشده باشد، از روش hash-based استفاده می‌کنیم
@@ -955,7 +921,7 @@ async function handleRequest(request, event) {
     
     // Route برای دریافت کانفیگ
     if (path === '/get-config' && request.method === 'POST') {
-        return await assignConfig(request, event.env || {});
+        return await assignConfig(request, event);
     }
     
     // Route برای مشاهده وضعیت (اختیاری)

@@ -22,6 +22,8 @@ const htmlPage = `
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#7b2cbf">
+    <link rel="icon" href="https://i.pinimg.com/1200x/bc/a2/c4/bca2c4b6409feeaea163b62dff8db92c.jpg" type="image/jpg">
     <title>دریافت کانفیگ</title>
     <style>
         * {
@@ -32,7 +34,12 @@ const htmlPage = `
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #1a1a2e 100%);
+            background-image: url('https://gngroup.org//admin_assets/images/blog/Advantages%20and%20Disadvantages%20of%20the%20Internet.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -43,77 +50,25 @@ const htmlPage = `
             overflow-x: hidden;
         }
         
-        /* خطوط و نقطه‌های معلق */
-        .floating-shapes {
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: rgba(10, 10, 10, 0.75);
+            z-index: 0;
             pointer-events: none;
-            z-index: 1;
-        }
-        
-        .floating-dot {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(102, 126, 234, 0.15);
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        .floating-line {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
-            box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
-            animation: floatLine 25s infinite ease-in-out;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.1;
-            }
-            25% {
-                transform: translate(100px, -100px) scale(1.2);
-                opacity: 0.3;
-            }
-            50% {
-                transform: translate(-50px, 150px) scale(0.8);
-                opacity: 0.2;
-            }
-            75% {
-                transform: translate(-150px, -50px) scale(1.1);
-                opacity: 0.25;
-            }
-        }
-        
-        @keyframes floatLine {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.1;
-            }
-            25% {
-                transform: translate(200px, 100px) rotate(45deg);
-                opacity: 0.2;
-            }
-            50% {
-                transform: translate(-100px, 200px) rotate(90deg);
-                opacity: 0.15;
-            }
-            75% {
-                transform: translate(150px, -100px) rotate(135deg);
-                opacity: 0.2;
-            }
         }
         
         .container {
-            background: rgba(20, 20, 30, 0.85);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
-                        0 0 0 1px rgba(102, 126, 234, 0.2),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            background: rgba(20, 20, 30, 0.25);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
+                        0 0 0 1px rgba(102, 126, 234, 0.2);
             padding: 40px;
             max-width: 500px;
             width: 100%;
@@ -121,8 +76,7 @@ const htmlPage = `
             position: relative;
             z-index: 10;
             border: 1px solid rgba(102, 126, 234, 0.3);
-            animation: containerFadeIn 0.8s ease-out,
-                       containerGlow 3s ease-in-out infinite;
+            animation: containerFadeIn 0.4s ease-out;
             transform: translateY(0);
             margin-top: 80px;
             margin-bottom: 100px;
@@ -131,26 +85,11 @@ const htmlPage = `
         @keyframes containerFadeIn {
             0% {
                 opacity: 0;
-                transform: translateY(30px) scale(0.95);
+                transform: translateY(10px);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        @keyframes containerGlow {
-            0%, 100% {
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
-                            0 0 0 1px rgba(102, 126, 234, 0.2),
-                            0 0 20px rgba(102, 126, 234, 0.1),
-                            inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            }
-            50% {
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
-                            0 0 0 1px rgba(102, 126, 234, 0.4),
-                            0 0 40px rgba(102, 126, 234, 0.3),
-                            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                transform: translateY(0);
             }
         }
         
@@ -158,33 +97,11 @@ const htmlPage = `
             color: #ffffff;
             margin-bottom: 30px;
             font-size: 28px;
-            text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
-            animation: titlePulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes titlePulse {
-            0%, 100% {
-                text-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
-            }
-            50% {
-                text-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
-            }
+            text-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
         }
         
         .input-group {
             margin-bottom: 20px;
-            animation: slideInUp 0.6s ease-out 0.2s both;
-        }
-        
-        @keyframes slideInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
         label {
@@ -203,7 +120,7 @@ const htmlPage = `
             border-radius: 10px;
             font-size: 16px;
             color: #ffffff;
-            transition: all 0.3s;
+            transition: border-color 0.2s, background 0.2s;
             text-align: center;
         }
         
@@ -211,9 +128,7 @@ const htmlPage = `
             outline: none;
             border-color: #667eea;
             background: rgba(30, 30, 40, 0.95);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2),
-                        0 0 20px rgba(102, 126, 234, 0.3);
-            transform: scale(1.02);
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.15);
         }
         
         button {
@@ -226,75 +141,37 @@ const htmlPage = `
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: opacity 0.2s, transform 0.2s;
             margin-top: 10px;
-            position: relative;
-            overflow: hidden;
-            animation: buttonSlideIn 0.6s ease-out 0.4s both;
-        }
-        
-        @keyframes buttonSlideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        button:hover::before {
-            width: 300px;
-            height: 300px;
         }
         
         button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5),
-                        0 0 20px rgba(102, 126, 234, 0.3);
-        }
-        
-        button:active {
+            opacity: 0.9;
             transform: translateY(-1px);
         }
         
-        button span {
-            position: relative;
-            z-index: 1;
+        button:active {
+            transform: translateY(0);
         }
         
         .result {
             margin-top: 30px;
             padding: 20px;
-            background: rgba(30, 30, 40, 0.6);
+            background: rgba(30, 30, 40, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border-radius: 10px;
             display: none;
             border: 1px solid rgba(102, 126, 234, 0.3);
-            animation: resultFadeIn 0.5s ease-out;
+            animation: resultFadeIn 0.3s ease-out;
         }
         
         @keyframes resultFadeIn {
             0% {
                 opacity: 0;
-                transform: scale(0.95);
             }
             100% {
                 opacity: 1;
-                transform: scale(1);
             }
         }
         
@@ -305,11 +182,12 @@ const htmlPage = `
         .result h3 {
             color: #ffffff;
             margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
         }
         
         .config-display {
-            background: rgba(20, 20, 30, 0.8);
+            background: rgba(20, 20, 30, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 15px;
             border-radius: 8px;
             border: 2px solid rgba(102, 126, 234, 0.4);
@@ -318,30 +196,24 @@ const htmlPage = `
             font-size: 14px;
             color: #e0e0e0;
             margin-top: 10px;
-            box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
-            transition: all 0.3s;
+            transition: border-color 0.2s;
         }
         
         .config-display:hover {
             border-color: rgba(102, 126, 234, 0.6);
-            box-shadow: 0 0 25px rgba(102, 126, 234, 0.4);
         }
         
         .error {
             color: #ff6b6b;
             margin-top: 15px;
             padding: 10px;
-            background: rgba(255, 107, 107, 0.15);
+            background: rgba(255, 107, 107, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 107, 107, 0.3);
             border-radius: 8px;
             display: none;
-            animation: errorShake 0.5s ease-out;
-        }
-        
-        @keyframes errorShake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+            animation: resultFadeIn 0.3s ease-out;
         }
         
         .error.show {
@@ -364,50 +236,19 @@ const htmlPage = `
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: opacity 0.2s, transform 0.2s;
             margin-top: 15px;
             display: none;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .copy-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        .copy-btn:hover::before {
-            width: 300px;
-            height: 300px;
         }
         
         .copy-btn.show {
             display: block;
-            animation: copyBtnSlideIn 0.5s ease-out;
-        }
-        
-        @keyframes copyBtnSlideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            animation: resultFadeIn 0.3s ease-out;
         }
         
         .copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
         
         .copy-btn:active {
@@ -418,27 +259,10 @@ const htmlPage = `
             background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
         }
         
-        .copy-btn span {
-            position: relative;
-            z-index: 1;
-        }
-        
         /* بخش آموزش */
         .tutorial-section {
             margin-top: 40px;
             padding-top: 30px;
-            animation: tutorialFadeIn 0.8s ease-out 0.6s both;
-        }
-        
-        @keyframes tutorialFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
         .tutorial-section hr {
@@ -453,7 +277,6 @@ const htmlPage = `
             font-size: 22px;
             margin-bottom: 20px;
             text-align: center;
-            text-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
         }
         
         .tutorial-text {
@@ -462,7 +285,9 @@ const htmlPage = `
             line-height: 1.8;
             margin-bottom: 25px;
             text-align: justify;
-            background: rgba(20, 20, 30, 0.4);
+            background: rgba(20, 20, 30, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 20px;
             border-radius: 12px;
             border: 1px solid rgba(102, 126, 234, 0.2);
@@ -483,7 +308,7 @@ const htmlPage = `
             color: #667eea;
             text-decoration: none;
             font-size: 16px;
-            transition: all 0.3s;
+            transition: color 0.2s;
             display: inline-block;
             border-bottom: 1px solid transparent;
         }
@@ -491,8 +316,6 @@ const htmlPage = `
         .tutorial-links a:hover {
             color: #8b9aff;
             border-bottom-color: #8b9aff;
-            transform: translateX(-5px);
-            text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
         }
         
         /* فوتر */
@@ -524,16 +347,15 @@ const htmlPage = `
             border-radius: 50%;
             color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: opacity 0.2s, transform 0.2s;
             border: 1px solid rgba(102, 126, 234, 0.3);
-            box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
         
         .github-link:hover {
             background: rgba(30, 30, 40, 0.8);
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 5px 25px rgba(102, 126, 234, 0.4);
-            border-color: rgba(102, 126, 234, 0.5);
+            opacity: 0.9;
+            transform: scale(1.05);
         }
         
         .github-icon {
@@ -545,9 +367,6 @@ const htmlPage = `
     </style>
 </head>
 <body>
-    <!-- خطوط و نقطه‌های معلق -->
-    <div class="floating-shapes" id="floatingShapes"></div>
-    
     <!-- هدر با آیکون گیتهاب -->
     <div class="header">
         <a href="https://github.com/Farzad-Ghavidel" target="_blank" rel="noopener noreferrer" class="github-link" title="GitHub">
@@ -558,7 +377,7 @@ const htmlPage = `
     </div>
     
     <div class="container">
-        <h1>🎯 دریافت کانفیگ</h1>
+        <h1>دریافت کانفیگ</h1>
         
         <div class="input-group">
             <label for="userName">لطفاً نام خود را وارد کنید:</label>
@@ -581,7 +400,7 @@ const htmlPage = `
             <hr>
             <h2 class="tutorial-title">📚 آموزش استفاده</h2>
             <p class="tutorial-text">
-                برای استفاده از کانفیگ پس از وارد کردن نام خود و کپی کردن آن وارد کلاینت خود شوید و با افزودن و یا پیست کردن کانفیگ در آن محیط به آن متصل شوید و از اینترنت آزاد بهره‌مند شوید.
+                برای استفاده از کانفیگ پس از وارد کردن نام خود و کپی کردن آن وارد کلاینت‌های V2Ray خود شوید و با افزودن و یا پیست کردن کانفیگ در آن محیط به آن متصل شوید و از اینترنت آزاد بهره‌مند شوید.
             </p>
             <ul class="tutorial-links">
                 <li>اگر اندروید هستید <a href="https://github.com/v2ray/v2ray-core/releases" target="_blank" rel="noopener noreferrer">V2ray</a></li>
@@ -707,45 +526,6 @@ const htmlPage = `
                 document.body.removeChild(textArea);
             }
         }
-        
-        // ایجاد خطوط و نقطه‌های معلق
-        function createFloatingShapes() {
-            const shapesContainer = document.getElementById('floatingShapes');
-            const numDots = 15;
-            const numLines = 8;
-            
-            // ایجاد نقطه‌ها
-            for (let i = 0; i < numDots; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'floating-dot';
-                const size = Math.random() * 8 + 4;
-                dot.style.width = size + 'px';
-                dot.style.height = size + 'px';
-                dot.style.left = Math.random() * 100 + '%';
-                dot.style.top = Math.random() * 100 + '%';
-                dot.style.animationDelay = Math.random() * 20 + 's';
-                dot.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                shapesContainer.appendChild(dot);
-            }
-            
-            // ایجاد خطوط
-            for (let i = 0; i < numLines; i++) {
-                const line = document.createElement('div');
-                line.className = 'floating-line';
-                const length = Math.random() * 200 + 100;
-                const width = Math.random() * 2 + 1;
-                line.style.width = length + 'px';
-                line.style.height = width + 'px';
-                line.style.left = Math.random() * 100 + '%';
-                line.style.top = Math.random() * 100 + '%';
-                line.style.animationDelay = Math.random() * 25 + 's';
-                line.style.animationDuration = (Math.random() * 10 + 20) + 's';
-                shapesContainer.appendChild(line);
-            }
-        }
-        
-        // ایجاد شکل‌های معلق
-        createFloatingShapes();
         
         // فوکوس خودکار روی ورودی
         userNameInput.focus();

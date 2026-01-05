@@ -1,8 +1,6 @@
-
-vless://4575dafb-88a6-4857-b5b6-e8287958aba9@104.19.63.40:8080?encryption=none&security=none&type=ws&host=newconfig.ghavidel.workers.dev&path=%2F%3Fed%3D2560#15%20%D8%AF%DB%8C
-
-{
-        "remarks": "15دی",
+[
+    {
+        "remarks": "💦 1 - VLESS - Domain : 443",
         "version": {
             "min": "25.10.15"
         },
@@ -18,7 +16,7 @@ vless://4575dafb-88a6-4857-b5b6-e8287958aba9@104.19.63.40:8080?encryption=none&s
                 {
                     "address": "8.8.8.8",
                     "domains": [
-                        "full:www.speedtest.net"
+                        "full:xn0gtmhaqhrffzwjq41ucr3abxhctcox.ghavidel.workers.dev"
                     ],
                     "skipFallback": true
                 }
@@ -63,7 +61,7 @@ vless://4575dafb-88a6-4857-b5b6-e8287958aba9@104.19.63.40:8080?encryption=none&s
                 "settings": {
                     "vnext": [
                         {
-                            "address": "www.speedtest.net",
+                            "address": "xn0gtmhaqhrffzwjq41ucr3abxhctcox.ghavidel.workers.dev",
                             "port": 443,
                             "users": [
                                 {
@@ -78,11 +76,11 @@ vless://4575dafb-88a6-4857-b5b6-e8287958aba9@104.19.63.40:8080?encryption=none&s
                     "network": "ws",
                     "wsSettings": {
                         "host": "xn0gtmhaqhrffzwjq41ucr3abxhctcox.ghavidel.workers.dev",
-                        "path": "/eyJqdW5rIjoiTVpJVFZEN1JYZDJQM1B6eCIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0=?ed=2560"
+                        "path": "/eyJqdW5rIjoiMFdBWE15ZzAiLCJwcm90b2NvbCI6InZsIiwibW9kZSI6InByb3h5aXAiLCJwYW5lbElQcyI6W119?ed=2560"
                     },
                     "security": "tls",
                     "tlsSettings": {
-                        "serverName": "xN0gTMHAqHrFFZwjq41Ucr3aBXHcTCOX.ghAVidEL.WOrkeRs.deV",
+                        "serverName": "xn0GTmHaQHrFFZWjQ41ucR3AbXhcTCox.gHaviDeL.wOrKERS.dEv",
                         "fingerprint": "chrome",
                         "alpn": [
                             "http/1.1"
@@ -198,4 +196,5 @@ vless://4575dafb-88a6-4857-b5b6-e8287958aba9@104.19.63.40:8080?encryption=none&s
             }
         },
         "stats": {}
-    }
+    },
+]

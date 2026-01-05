@@ -1,3 +1,199 @@
-vless://56746b22-76fd-46df-9bff-1525c51e4a9d@104.21.69.153:443?encryption=none&security=tls&sni=13f3dTKHyJgxzG6F4x6naLS0Af4HNqW9.forFRieNDs.woRkERS.Dev&alpn=http%2F1.1&fp=chrome&type=ws&host=13f3dtkhyjgxzg6f4x6nals0af4hnqw9.forfriends.workers.dev&path=%2FeyJqdW5rIjoiTzVHVHlyMDdsT2FMWmFvTSIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0%3D%3Fed%3D2560#Bypass%20Filter
-vless://56746b22-76fd-46df-9bff-1525c51e4a9d@13f3dtkhyjgxzg6f4x6nals0af4hnqw9.forfriends.workers.dev:2053?encryption=none&security=tls&sni=13f3DTKhYJGxzg6f4x6nalS0AF4hnqW9.forfRIENDS.wOrKERS.DEV&alpn=http%2F1.1&fp=chrome&type=ws&host=13f3dtkhyjgxzg6f4x6nals0af4hnqw9.forfriends.workers.dev&path=%2FeyJqdW5rIjoiZVRrZEZoNzVxUyIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0%3D%3Fed%3D2560#Bypass%20Filter
-vless://4575dafb-88a6-4857-b5b6-e8287958aba9@630570a0-bfa2-9d26-fe9c-c40fd422e7d4.newconfig.ghavidel.workers.dev.cf.090227.xyz:80?encryption=none&security=&sni=630570a0-bfa2-9d26-fe9c-c40fd422e7d4.newconfig.ghavidel.workers.dev.cf.090227.xyz&fp=randomized&type=ws&host=newconfig.ghavidel.workers.dev&path=%2F%3Fed%3D2560&allowInsecure=1&fragment=1%2C40-60%2C30-50%2Ctlshello#Bypass%20Filter
+ {
+        "remarks": "15دی",
+        "version": {
+            "min": "25.10.15"
+        },
+        "log": {
+            "loglevel": "warning"
+        },
+        "dns": {
+            "servers": [
+                {
+                    "address": "https://8.8.8.8/dns-query",
+                    "tag": "remote-dns"
+                },
+                {
+                    "address": "8.8.8.8",
+                    "domains": [
+                        "full:www.speedtest.net"
+                    ],
+                    "skipFallback": true
+                }
+            ],
+            "queryStrategy": "UseIP",
+            "tag": "dns"
+        },
+        "inbounds": [
+            {
+                "listen": "127.0.0.1",
+                "port": 10808,
+                "protocol": "socks",
+                "settings": {
+                    "auth": "noauth",
+                    "udp": true
+                },
+                "sniffing": {
+                    "destOverride": [
+                        "http",
+                        "tls"
+                    ],
+                    "enabled": true,
+                    "routeOnly": true
+                },
+                "tag": "mixed-in"
+            },
+            {
+                "listen": "127.0.0.1",
+                "port": 10853,
+                "protocol": "dokodemo-door",
+                "settings": {
+                    "address": "1.1.1.1",
+                    "network": "tcp,udp",
+                    "port": 53
+                },
+                "tag": "dns-in"
+            }
+        ],
+        "outbounds": [
+            {
+                "protocol": "vless",
+                "settings": {
+                    "vnext": [
+                        {
+                            "address": "www.speedtest.net",
+                            "port": 443,
+                            "users": [
+                                {
+                                    "id": "2852c5c4-614c-4d97-a7d3-143ed1072ef1",
+                                    "encryption": "none"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "streamSettings": {
+                    "network": "ws",
+                    "wsSettings": {
+                        "host": "xn0gtmhaqhrffzwjq41ucr3abxhctcox.ghavidel.workers.dev",
+                        "path": "/eyJqdW5rIjoiTVpJVFZEN1JYZDJQM1B6eCIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0=?ed=2560"
+                    },
+                    "security": "tls",
+                    "tlsSettings": {
+                        "serverName": "xN0gTMHAqHrFFZwjq41Ucr3aBXHcTCOX.ghAVidEL.WOrkeRs.deV",
+                        "fingerprint": "chrome",
+                        "alpn": [
+                            "http/1.1"
+                        ],
+                        "allowInsecure": false
+                    },
+                    "sockopt": {
+                        "domainStrategy": "UseIP",
+                        "happyEyeballs": {
+                            "tryDelayMs": 250,
+                            "prioritizeIPv6": false,
+                            "interleave": 2,
+                            "maxConcurrentTry": 4
+                        }
+                    }
+                },
+                "tag": "proxy"
+            },
+            {
+                "protocol": "dns",
+                "settings": {
+                    "nonIPQuery": "reject"
+                },
+                "tag": "dns-out"
+            },
+            {
+                "protocol": "freedom",
+                "settings": {
+                    "domainStrategy": "UseIP"
+                },
+                "tag": "direct"
+            },
+            {
+                "protocol": "blackhole",
+                "settings": {
+                    "response": {
+                        "type": "http"
+                    }
+                },
+                "tag": "block"
+            }
+        ],
+        "routing": {
+            "domainStrategy": "IPIfNonMatch",
+            "rules": [
+                {
+                    "inboundTag": [
+                        "mixed-in"
+                    ],
+                    "port": 53,
+                    "outboundTag": "dns-out",
+                    "type": "field"
+                },
+                {
+                    "inboundTag": [
+                        "dns-in"
+                    ],
+                    "outboundTag": "dns-out",
+                    "type": "field"
+                },
+                {
+                    "inboundTag": [
+                        "remote-dns"
+                    ],
+                    "outboundTag": "proxy",
+                    "type": "field"
+                },
+                {
+                    "inboundTag": [
+                        "dns"
+                    ],
+                    "outboundTag": "direct",
+                    "type": "field"
+                },
+                {
+                    "domain": [
+                        "geosite:private"
+                    ],
+                    "outboundTag": "direct",
+                    "type": "field"
+                },
+                {
+                    "ip": [
+                        "geoip:private"
+                    ],
+                    "outboundTag": "direct",
+                    "type": "field"
+                },
+                {
+                    "network": "udp",
+                    "outboundTag": "block",
+                    "type": "field"
+                },
+                {
+                    "network": "tcp",
+                    "outboundTag": "proxy",
+                    "type": "field"
+                }
+            ]
+        },
+        "policy": {
+            "levels": {
+                "0": {
+                    "connIdle": 300,
+                    "handshake": 4,
+                    "uplinkOnly": 1,
+                    "downlinkOnly": 1
+                }
+            },
+            "system": {
+                "statsOutboundUplink": true,
+                "statsOutboundDownlink": true
+            }
+        },
+        "stats": {}
+    }
+vless://4575dafb-88a6-4857-b5b6-e8287958aba9@104.19.63.40:8080?encryption=none&security=none&type=ws&host=newconfig.ghavidel.workers.dev&path=%2F%3Fed%3D2560#15%20%D8%AF%DB%8C

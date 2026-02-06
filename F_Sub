@@ -1,1 +1,4 @@
-
+vless://4666efe1-b2d3-4791-9da1-75ec9f670a9e@172.64.49.177:443?encryption=none&security=tls&sni=cf.ghavidel.workers.dev&alpn=h3%2Ch2%2Chttp%2F1.1&fp=chrome&type=ws&host=cf.ghavidel.workers.dev&path=%2F%3Fed%3D2048#Cf%20Config%20
+trojan://4666efe1-b2d3-4791-9da1-75ec9f670a9e@104.16.62.45:443?security=tls&sni=cf.ghavidel.workers.dev&alpn=h3%2Ch2%2Chttp%2F1.1&fp=chrome&type=ws&host=cf.ghavidel.workers.dev&path=%2F%3Fed%3D2048#Cf2
+vless://229923e0-a2a9-4b50-90fe-7b3270543a91@188.114.97.3:2087?encryption=none&security=tls&sni=ForfamILY.ghaVidEL.woRkERs.dev&fp=chrome&type=ws&host=forfamily.ghavidel.workers.dev&path=%2FeyJqdW5rIjoiMWVGU0tsd2FZYSIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0%3D%3Fed%3D2560#Bpb
+vless://229923e0-a2a9-4b50-90fe-7b3270543a91@188.114.96.3:2083?encryption=none&security=tls&sni=FORfaMILy.ghaVIDEL.WorKERS.dev&fp=chrome&type=ws&host=forfamily.ghavidel.workers.dev&path=%2FeyJqdW5rIjoiZUpYeGJXZ0NyIiwicHJvdG9jb2wiOiJ2bCIsIm1vZGUiOiJwcm94eWlwIiwicGFuZWxJUHMiOltdfQ%3D%3D%3Fed%3D2560#BPB
